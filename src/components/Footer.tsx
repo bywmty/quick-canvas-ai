@@ -1,0 +1,76 @@
+const footerLinks = {
+  company: {
+    title: "关于趣云",
+    links: ["公司介绍", "发展历程", "企业文化", "加入我们"],
+  },
+  products: {
+    title: "产品服务",
+    links: ["Quick AI Data", "Quick Fabric", "Quick Context", "Quick Mind", "Agent Factory"],
+  },
+  solutions: {
+    title: "解决方案",
+    links: ["零售行业", "金融行业", "制造行业", "快消行业"],
+  },
+  support: {
+    title: "支持与服务",
+    links: ["技术文档", "API接口", "常见问题", "联系我们"],
+  },
+  contact: {
+    title: "联系我们",
+    links: ["商务合作", "技术支持"],
+  },
+};
+
+const Footer = () => {
+  return (
+    <footer className="bg-card border-t border-border">
+      <div className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+          {Object.entries(footerLinks).map(([key, section]) => (
+            <div key={key}>
+              <h3 className="font-semibold text-foreground mb-4">{section.title}</h3>
+              <ul className="space-y-2">
+                {section.links.map((link) => (
+                  <li key={link}>
+                    <a
+                      href="#"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+              <span className="text-primary font-bold text-sm">Q</span>
+            </div>
+            <span className="text-lg font-bold">
+              <span className="text-gradient-primary">趣云</span>
+              <span className="text-foreground ml-1">AI</span>
+            </span>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+            <span>北京趣云科技发展有限公司</span>
+            <span className="hidden md:inline">|</span>
+            <span>010-XXXX-XXXX</span>
+            <span className="hidden md:inline">|</span>
+            <span>北京市朝阳区XXX大厦</span>
+          </div>
+
+          <p className="text-sm text-muted-foreground">
+            Copyright © 2024 趣云AI. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
