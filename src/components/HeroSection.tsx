@@ -1,20 +1,6 @@
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
-  // Generate circuit paths for the chip
-  const circuitPaths = [
-    { x1: 50, y1: 30, x2: 90, y2: 30 },
-    { x1: 50, y1: 50, x2: 100, y2: 50 },
-    { x1: 50, y1: 70, x2: 85, y2: 70 },
-    { x1: 30, y1: 50, x2: 0, y2: 50 },
-    { x1: 30, y1: 30, x2: 10, y2: 30 },
-    { x1: 30, y1: 70, x2: 15, y2: 70 },
-    { x1: 40, y1: 20, x2: 40, y2: 0 },
-    { x1: 60, y1: 20, x2: 60, y2: 5 },
-    { x1: 40, y1: 80, x2: 40, y2: 100 },
-    { x1: 60, y1: 80, x2: 60, y2: 95 },
-  ];
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background Effects */}
@@ -64,152 +50,286 @@ const HeroSection = () => {
             className="relative hidden lg:flex items-center justify-center"
           >
             <div className="relative w-[500px] h-[500px]">
+              {/* Outer Energy Rings */}
+              <motion.div
+                className="absolute inset-0 rounded-full border border-primary/20"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute inset-[5%] rounded-full border border-primary/30"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute inset-[10%] rounded-full border-2 border-dashed border-primary/20"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              />
+
               {/* Radiating Electric Current Effects */}
-              {[...Array(12)].map((_, i) => {
-                const angle = (i * 30) * (Math.PI / 180);
-                const length = 180 + Math.random() * 60;
+              {[...Array(16)].map((_, i) => {
+                const angle = (i * 22.5) * (Math.PI / 180);
+                const length = 150 + Math.random() * 80;
                 return (
                   <motion.div
                     key={`current-${i}`}
                     className="absolute top-1/2 left-1/2 origin-left"
                     style={{
                       width: `${length}px`,
-                      height: '2px',
-                      transform: `translate(-50%, -50%) rotate(${i * 30}deg) translateX(80px)`,
+                      height: '3px',
+                      transform: `translate(-50%, -50%) rotate(${i * 22.5}deg) translateX(100px)`,
                     }}
                   >
                     <motion.div
-                      className="h-full bg-gradient-to-r from-primary via-primary/80 to-transparent rounded-full"
+                      className="h-full rounded-full"
+                      style={{
+                        background: `linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.6), transparent)`,
+                        boxShadow: `0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.5)`,
+                        transformOrigin: 'left',
+                      }}
                       animate={{
-                        scaleX: [0, 1, 0],
-                        opacity: [0, 1, 0],
+                        scaleX: [0, 1, 0.8, 0],
+                        opacity: [0, 1, 0.8, 0],
                       }}
                       transition={{
-                        duration: 1.5,
-                        delay: i * 0.1,
+                        duration: 1.2,
+                        delay: i * 0.08,
                         repeat: Infinity,
-                        repeatDelay: 0.5,
+                        repeatDelay: 0.3,
                       }}
-                      style={{ transformOrigin: 'left' }}
                     />
                     {/* Electric spark at end */}
                     <motion.div
-                      className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary shadow-[0_0_15px_hsl(var(--primary)),0_0_30px_hsl(var(--primary)/0.5)]"
+                      className="absolute right-0 top-1/2 -translate-y-1/2"
                       animate={{
-                        scale: [0, 1.5, 0],
+                        scale: [0, 2, 0],
                         opacity: [0, 1, 0],
                       }}
                       transition={{
-                        duration: 1.5,
-                        delay: i * 0.1 + 0.3,
+                        duration: 1.2,
+                        delay: i * 0.08 + 0.2,
                         repeat: Infinity,
-                        repeatDelay: 0.5,
+                        repeatDelay: 0.3,
                       }}
-                    />
+                    >
+                      <div className="w-4 h-4 rounded-full bg-primary shadow-[0_0_20px_hsl(var(--primary)),0_0_40px_hsl(var(--primary)),0_0_60px_hsl(var(--primary)/0.5)]" />
+                    </motion.div>
+                    {/* Branching lightning */}
+                    {i % 2 === 0 && (
+                      <motion.div
+                        className="absolute right-8 top-1/2 w-12 h-0.5 bg-gradient-to-r from-primary/60 to-transparent rounded-full"
+                        style={{ transform: 'rotate(30deg)' }}
+                        animate={{ opacity: [0, 1, 0], scaleX: [0, 1, 0] }}
+                        transition={{
+                          duration: 0.8,
+                          delay: i * 0.08 + 0.3,
+                          repeat: Infinity,
+                          repeatDelay: 0.7,
+                        }}
+                      />
+                    )}
                   </motion.div>
                 );
               })}
 
-              {/* Outer Glow Ring */}
-              <motion.div
-                className="absolute inset-[15%] rounded-3xl border border-primary/30"
-                animate={{ opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
+              {/* Hexagonal Frame */}
+              <svg className="absolute inset-[12%] w-[76%] h-[76%]" viewBox="0 0 100 100">
+                <motion.polygon
+                  points="50,2 93,25 93,75 50,98 7,75 7,25"
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="0.5"
+                  strokeOpacity="0.4"
+                  animate={{ strokeOpacity: [0.2, 0.6, 0.2] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <motion.polygon
+                  points="50,8 87,28 87,72 50,92 13,72 13,28"
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="0.8"
+                  strokeOpacity="0.6"
+                  animate={{ strokeOpacity: [0.4, 0.8, 0.4] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                />
+              </svg>
 
               {/* AI Chip Body */}
-              <div className="absolute inset-[20%] rounded-2xl bg-gradient-to-br from-secondary via-card to-secondary border-2 border-primary/40 shadow-[0_0_60px_hsl(var(--primary)/0.3),inset_0_0_30px_hsl(var(--primary)/0.1)]">
-                {/* Chip Surface Pattern */}
-                <div className="absolute inset-4 rounded-xl bg-gradient-to-br from-primary/5 to-transparent">
-                  {/* Grid Pattern */}
-                  <div className="absolute inset-0 opacity-30" style={{
-                    backgroundImage: `
-                      linear-gradient(hsl(var(--primary) / 0.2) 1px, transparent 1px),
-                      linear-gradient(90deg, hsl(var(--primary) / 0.2) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '20px 20px'
+              <div className="absolute inset-[18%] rounded-2xl bg-gradient-to-br from-secondary via-card to-secondary border-2 border-primary/50 shadow-[0_0_80px_hsl(var(--primary)/0.4),inset_0_0_40px_hsl(var(--primary)/0.15)]">
+                {/* Chip Surface Pattern - Hexagonal Grid */}
+                <div className="absolute inset-2 rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 opacity-40" style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 15V45L30 60L0 45V15z' fill='none' stroke='%2300ffd5' stroke-opacity='0.15'/%3E%3C/svg%3E")`,
+                    backgroundSize: '30px 30px'
                   }} />
                 </div>
 
-                {/* Circuit Traces on Chip */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  {circuitPaths.map((path, i) => (
+                {/* Circuit Lines */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+                  {/* Horizontal lines */}
+                  {[20, 35, 50, 65, 80].map((y, i) => (
                     <motion.line
-                      key={i}
-                      x1={path.x1}
-                      y1={path.y1}
-                      x2={path.x2}
-                      y2={path.y2}
+                      key={`h-${i}`}
+                      x1="10" y1={y} x2="90" y2={y}
                       stroke="hsl(var(--primary))"
-                      strokeWidth="0.5"
-                      strokeLinecap="round"
-                      initial={{ pathLength: 0, opacity: 0.3 }}
-                      animate={{ pathLength: 1, opacity: [0.3, 0.8, 0.3] }}
-                      transition={{
-                        pathLength: { duration: 2, repeat: Infinity },
-                        opacity: { duration: 1.5, repeat: Infinity, delay: i * 0.1 }
-                      }}
+                      strokeWidth="0.3"
+                      strokeOpacity="0.4"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: [0, 1, 1, 0] }}
+                      transition={{ duration: 3, delay: i * 0.2, repeat: Infinity }}
                     />
                   ))}
-                </svg>
-
-                {/* Central Core */}
-                <div className="absolute inset-[25%] rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/50 flex items-center justify-center">
-                  <motion.div
-                    className="absolute inset-0 rounded-xl bg-primary/10"
-                    animate={{ opacity: [0.2, 0.5, 0.2] }}
+                  {/* Vertical lines */}
+                  {[20, 35, 50, 65, 80].map((x, i) => (
+                    <motion.line
+                      key={`v-${i}`}
+                      x1={x} y1="10" x2={x} y2="90"
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="0.3"
+                      strokeOpacity="0.4"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: [0, 1, 1, 0] }}
+                      transition={{ duration: 3, delay: i * 0.2 + 0.5, repeat: Infinity }}
+                    />
+                  ))}
+                  {/* Diagonal accents */}
+                  <motion.path
+                    d="M20,20 L40,40 M60,60 L80,80 M80,20 L60,40 M40,60 L20,80"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth="0.4"
+                    fill="none"
+                    animate={{ strokeOpacity: [0.2, 0.6, 0.2] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <motion.span 
-                    className="text-5xl font-bold text-gradient-primary relative z-10"
-                    animate={{ 
-                      textShadow: [
-                        '0 0 20px hsl(var(--primary) / 0.5)',
-                        '0 0 40px hsl(var(--primary) / 0.8)',
-                        '0 0 20px hsl(var(--primary) / 0.5)'
+                </svg>
+
+                {/* Corner Decorations */}
+                {['top-left', 'top-right', 'bottom-left', 'bottom-right'].map((corner) => (
+                  <div
+                    key={corner}
+                    className={`absolute w-8 h-8 border-primary/60 ${
+                      corner === 'top-left' ? 'top-2 left-2 border-t-2 border-l-2 rounded-tl-lg' :
+                      corner === 'top-right' ? 'top-2 right-2 border-t-2 border-r-2 rounded-tr-lg' :
+                      corner === 'bottom-left' ? 'bottom-2 left-2 border-b-2 border-l-2 rounded-bl-lg' :
+                      'bottom-2 right-2 border-b-2 border-r-2 rounded-br-lg'
+                    }`}
+                  />
+                ))}
+
+                {/* Central Core */}
+                <div className="absolute inset-[22%] rounded-xl overflow-hidden">
+                  {/* Animated background */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/10 to-primary/30"
+                    animate={{
+                      background: [
+                        'linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.3))',
+                        'linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.1))',
+                        'linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.3))',
+                      ]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  />
+                  
+                  {/* Border glow */}
+                  <motion.div
+                    className="absolute inset-0 rounded-xl border-2 border-primary"
+                    animate={{
+                      boxShadow: [
+                        'inset 0 0 20px hsl(var(--primary) / 0.3), 0 0 30px hsl(var(--primary) / 0.4)',
+                        'inset 0 0 40px hsl(var(--primary) / 0.5), 0 0 60px hsl(var(--primary) / 0.6)',
+                        'inset 0 0 20px hsl(var(--primary) / 0.3), 0 0 30px hsl(var(--primary) / 0.4)',
                       ]
                     }}
                     transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    趣云
-                  </motion.span>
+                  />
+                  
+                  {/* AI Text */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <motion.div
+                      className="relative"
+                      animate={{
+                        scale: [1, 1.05, 1],
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <motion.span 
+                        className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary via-primary/80 to-accent relative z-10"
+                        style={{
+                          textShadow: '0 0 40px hsl(var(--primary) / 0.8), 0 0 80px hsl(var(--primary) / 0.4)',
+                          WebkitTextStroke: '1px hsl(var(--primary) / 0.5)',
+                        }}
+                        animate={{
+                          textShadow: [
+                            '0 0 40px hsl(var(--primary) / 0.6), 0 0 80px hsl(var(--primary) / 0.3)',
+                            '0 0 60px hsl(var(--primary) / 1), 0 0 120px hsl(var(--primary) / 0.6)',
+                            '0 0 40px hsl(var(--primary) / 0.6), 0 0 80px hsl(var(--primary) / 0.3)',
+                          ]
+                        }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        AI
+                      </motion.span>
+                      {/* Glitch effect */}
+                      <motion.span
+                        className="absolute inset-0 text-6xl font-black text-primary/30"
+                        animate={{
+                          x: [-2, 2, -2],
+                          opacity: [0, 0.5, 0],
+                        }}
+                        transition={{ duration: 0.2, repeat: Infinity, repeatDelay: 3 }}
+                      >
+                        AI
+                      </motion.span>
+                    </motion.div>
+                  </div>
+
+                  {/* Scanning line effect */}
+                  <motion.div
+                    className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"
+                    animate={{ top: ['0%', '100%', '0%'] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  />
                 </div>
               </div>
 
               {/* Chip Pins / Connectors */}
               {['top', 'bottom', 'left', 'right'].map((side) => {
                 const isVertical = side === 'top' || side === 'bottom';
-                const count = 8;
+                const count = 10;
                 return (
                   <div
                     key={side}
                     className={`absolute ${
-                      side === 'top' ? 'top-[18%] left-[25%] right-[25%] h-4' :
-                      side === 'bottom' ? 'bottom-[18%] left-[25%] right-[25%] h-4' :
-                      side === 'left' ? 'left-[18%] top-[25%] bottom-[25%] w-4' :
-                      'right-[18%] top-[25%] bottom-[25%] w-4'
+                      side === 'top' ? 'top-[16%] left-[22%] right-[22%] h-5' :
+                      side === 'bottom' ? 'bottom-[16%] left-[22%] right-[22%] h-5' :
+                      side === 'left' ? 'left-[16%] top-[22%] bottom-[22%] w-5' :
+                      'right-[16%] top-[22%] bottom-[22%] w-5'
                     } flex ${isVertical ? 'flex-row justify-around' : 'flex-col justify-around'}`}
                   >
                     {[...Array(count)].map((_, i) => (
                       <motion.div
                         key={i}
-                        className={`${isVertical ? 'w-1.5 h-4' : 'w-4 h-1.5'} bg-gradient-to-${
-                          side === 'top' ? 't' : side === 'bottom' ? 'b' : side === 'left' ? 'l' : 'r'
-                        } from-primary/60 to-primary/20 rounded-sm`}
-                        animate={{
-                          opacity: [0.4, 1, 0.4],
-                          boxShadow: [
-                            '0 0 5px hsl(var(--primary) / 0.3)',
-                            '0 0 15px hsl(var(--primary) / 0.6)',
-                            '0 0 5px hsl(var(--primary) / 0.3)'
-                          ]
+                        className={`${isVertical ? 'w-2 h-5' : 'w-5 h-2'} rounded-sm relative overflow-hidden`}
+                        style={{
+                          background: `linear-gradient(${
+                            side === 'top' ? '180deg' : side === 'bottom' ? '0deg' : side === 'left' ? '90deg' : '270deg'
+                          }, hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.3))`,
                         }}
-                        transition={{
-                          duration: 1.5,
-                          delay: i * 0.1,
-                          repeat: Infinity,
-                        }}
-                      />
+                      >
+                        <motion.div
+                          className="absolute inset-0 bg-primary"
+                          animate={{
+                            opacity: [0.3, 1, 0.3],
+                          }}
+                          transition={{
+                            duration: 0.8,
+                            delay: i * 0.08,
+                            repeat: Infinity,
+                          }}
+                        />
+                      </motion.div>
                     ))}
                   </div>
                 );
@@ -217,25 +337,32 @@ const HeroSection = () => {
 
               {/* Floating Data Labels */}
               <motion.div 
-                className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-2 glass-card rounded-lg text-xs text-primary border border-primary/30"
-                animate={{ y: [0, -8, 0] }}
+                className="absolute -top-6 left-1/2 -translate-x-1/2 px-4 py-2 glass-card rounded-lg text-xs text-primary border border-primary/30 font-mono"
+                animate={{ y: [0, -10, 0], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                SpeedxIdx-3xoT
+                <span className="text-accent">◆</span> Neural.Core.v3
               </motion.div>
               <motion.div 
-                className="absolute -bottom-4 right-[10%] px-4 py-2 glass-card rounded-lg text-xs text-primary border border-primary/30"
-                animate={{ y: [0, 8, 0] }}
+                className="absolute -bottom-6 right-[5%] px-4 py-2 glass-card rounded-lg text-xs text-primary border border-primary/30 font-mono"
+                animate={{ y: [0, 10, 0], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 1 }}
               >
-                AI.dataSync
+                <span className="text-accent">◆</span> DataSync.Active
               </motion.div>
               <motion.div 
-                className="absolute top-1/2 -right-8 px-3 py-1 glass-card rounded-lg text-xs text-accent border border-accent/30"
-                animate={{ x: [0, 8, 0] }}
+                className="absolute top-1/2 -right-12 px-3 py-1 glass-card rounded-lg text-xs text-accent border border-accent/30 font-mono"
+                animate={{ x: [0, 10, 0], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
               >
-                Neural Core
+                <span className="text-primary">●</span> Quantum.Link
+              </motion.div>
+              <motion.div 
+                className="absolute top-1/3 -left-10 px-3 py-1 glass-card rounded-lg text-xs text-primary border border-primary/30 font-mono"
+                animate={{ x: [0, -10, 0], opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+              >
+                <span className="text-accent">▲</span> AI.Matrix
               </motion.div>
             </div>
           </motion.div>
