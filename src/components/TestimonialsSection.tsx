@@ -44,76 +44,97 @@ const TestimonialsSection = () => {
           </h2>
         </motion.div>
 
-        {/* Testimonial Card */}
-        <div className="max-w-3xl mx-auto">
+        {/* Testimonial Card with Side Arrows */}
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative flex items-center gap-4"
           >
-            {/* Decorative Border */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 via-primary/5 to-primary/20 p-[1px]">
-              <div className="w-full h-full rounded-2xl bg-card" />
-            </div>
+            {/* Left Arrow */}
+            <button
+              onClick={prev}
+              className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-primary/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-300"
+            >
+              <ChevronLeft size={24} />
+            </button>
 
-            <div className="relative glass-card rounded-2xl p-8 md:p-12">
-              <Quote className="w-12 h-12 text-primary/30 mb-6" />
+            {/* Card */}
+            <div className="flex-1 relative">
+              {/* Outer Frame */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-transparent" />
+              <div className="absolute inset-[3px] rounded-2xl border border-primary/20" />
               
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={current}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="min-h-[120px]"
-                >
-                  <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                    {testimonials[current].content}
-                  </p>
-                  
-                  <div className="text-center">
-                    <p className="font-semibold text-foreground text-lg">
-                      {testimonials[current].name}
-                    </p>
-                    <p className="text-primary text-sm">
-                      {testimonials[current].title}
-                    </p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+              {/* Inner Content */}
+              <div className="relative glass-card rounded-2xl p-8 md:p-10 m-1">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={current}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    {/* Name and Title at Top */}
+                    <div className="flex items-center gap-4 mb-6">
+                      {/* Avatar Placeholder */}
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 border-2 border-primary/40 flex items-center justify-center">
+                        <span className="text-lg font-bold text-primary">
+                          {testimonials[current].name.charAt(0)}
+                        </span>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-foreground text-lg">
+                          {testimonials[current].name}
+                        </p>
+                        <p className="text-primary text-sm">
+                          {testimonials[current].title}
+                        </p>
+                      </div>
+                      <Quote className="w-8 h-8 text-primary/20 ml-auto" />
+                    </div>
+                    
+                    {/* Quote Content */}
+                    <div className="relative pl-4 border-l-2 border-primary/30">
+                      <p className="text-muted-foreground text-lg leading-relaxed min-h-[100px]">
+                        "{testimonials[current].content}"
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
 
-              {/* Navigation */}
-              <div className="flex justify-center items-center gap-4 mt-8">
-                <button
-                  onClick={prev}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                
-                <div className="flex gap-2">
+                {/* Pagination Dots */}
+                <div className="flex justify-center gap-2 mt-8">
                   {testimonials.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrent(index)}
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        index === current ? "bg-primary" : "bg-muted"
+                      className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                        index === current 
+                          ? "bg-primary w-6" 
+                          : "bg-muted hover:bg-primary/50"
                       }`}
                     />
                   ))}
                 </div>
-                
-                <button
-                  onClick={next}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
-                >
-                  <ChevronRight size={20} />
-                </button>
               </div>
+
+              {/* Corner Decorations */}
+              <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-primary/50 rounded-tl-lg" />
+              <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-primary/50 rounded-tr-lg" />
+              <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-primary/50 rounded-bl-lg" />
+              <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-primary/50 rounded-br-lg" />
             </div>
+
+            {/* Right Arrow */}
+            <button
+              onClick={next}
+              className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-primary/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-300"
+            >
+              <ChevronRight size={24} />
+            </button>
           </motion.div>
         </div>
       </div>
