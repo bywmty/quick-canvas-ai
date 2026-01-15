@@ -1,7 +1,10 @@
 const footerLinks = {
   company: {
     title: "关于趣云",
-    links: ["公司介绍", "发展历程", "企业文化",],
+    links: [
+      { label: "公司介绍", href: "/about" },
+      { label: "企业文化", href: "/about#culture" }
+    ],
   },
   products: {
     title: "产品服务",
@@ -17,7 +20,10 @@ const footerLinks = {
   // },
   contact: {
     title: "联系我们",
-    links: ["商务合作", "技术支持"],
+    links: [
+      { label: "商务合作", href: "/about#contact" },
+      { label: "技术支持", href: "/about#contact" }
+    ],
   },
 };
 
@@ -31,13 +37,22 @@ const Footer = () => {
               <h3 className="font-semibold text-foreground mb-4">{section.title}</h3>
               <ul className="space-y-2">
                 {section.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {link}
-                    </a>
+                  <li key={typeof link === 'string' ? link : link.label}>
+                    {typeof link === 'string' ? (
+                      <a
+                        href="#"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {link}
+                      </a>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

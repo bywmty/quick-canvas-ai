@@ -28,7 +28,7 @@ const MaaSSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-primary text-sm font-medium tracking-wider mb-4">
+          <p className="text-primary text-sm font-medium tracking-wider mb-4 mt-4">
             AI 2.0 时代的智能基建
           </p>
           <h2 className="section-title text-foreground">

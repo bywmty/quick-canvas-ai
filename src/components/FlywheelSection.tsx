@@ -52,13 +52,13 @@ const FlywheelSection = () => {
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--accent)/0.08)_0%,transparent_60%)]" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10 mt-5">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-6"
         >
           <h2 className="section-title text-foreground">
             MaaS筑底，RaaS破局
@@ -228,7 +228,7 @@ const FlywheelSection = () => {
           </div>
 
           {/* Labels */}
-          <div className="flex justify-between mt-12 px-4">
+          <div className="flex justify-between mt-6 px-4">
             <motion.div 
               className="text-center glass-card px-6 py-4 rounded-xl border border-accent/30"
               whileHover={{ scale: 1.05 }}

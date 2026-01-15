@@ -1,9 +1,32 @@
 import { motion } from "framer-motion";
-import { Brain, Hand, Heart, Users, Target, Handshake, Mail, Shield, Clock } from "lucide-react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import {
+  Brain,
+  Hand,
+  Heart,
+  Users,
+  Target,
+  Handshake,
+  Mail,
+  Shield,
+  Clock,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const AboutUs = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   // Floating particles for background
   const particles = Array.from({ length: 20 }, (_, i) => ({
     id: i,
@@ -17,7 +40,7 @@ const AboutUs = () => {
   // Data flow particles for brain visualization
   const dataParticles = Array.from({ length: 12 }, (_, i) => ({
     id: i,
-    angle: (i * 30) * (Math.PI / 180),
+    angle: i * 30 * (Math.PI / 180),
     delay: i * 0.3,
   }));
 
@@ -75,14 +98,14 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
-      
+
       {/* Hero Banner */}
       <section className="relative pt-32 pb-20 cyber-grid">
         {/* Background effects */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-          
+
           {/* Floating particles */}
           {particles.map((particle) => (
             <motion.div
@@ -143,33 +166,52 @@ const AboutUs = () => {
                 <motion.div
                   className="absolute -inset-16 rounded-full border-2 border-dashed border-primary/30"
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  transition={{
+                    duration: 30,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
                 />
-                
+
                 {/* Middle pulse ring */}
                 <motion.div
                   className="absolute -inset-12 rounded-full border border-primary/40"
                   animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.8, 0.4] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 />
-                
+
                 {/* Inner glow ring */}
                 <motion.div
                   className="absolute -inset-8 rounded-full bg-primary/10"
                   animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 />
-                
+
                 {/* Brain icon container */}
                 <motion.div
                   className="relative w-32 h-32 rounded-full bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center glow-primary"
                   animate={{ scale: [1, 1.02, 1] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
                   <Brain className="w-16 h-16 text-primary" />
-                  
+
                   {/* Neural connection lines */}
-                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 128 128">
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    viewBox="0 0 128 128"
+                  >
                     {[0, 60, 120, 180, 240, 300].map((angle, i) => (
                       <motion.line
                         key={i}
@@ -192,7 +234,7 @@ const AboutUs = () => {
                     ))}
                   </svg>
                 </motion.div>
-                
+
                 {/* Data flow particles */}
                 {dataParticles.map((particle) => (
                   <motion.div
@@ -218,7 +260,7 @@ const AboutUs = () => {
                     }}
                   />
                 ))}
-                
+
                 {/* Hands extending from brain */}
                 <motion.div
                   className="absolute -left-24 top-1/2 -translate-y-1/2"
@@ -227,17 +269,22 @@ const AboutUs = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.3 }}
                 >
+                  {/*  */}
                   <motion.div
                     className="p-4 rounded-full bg-accent/20 border border-accent/40"
-                    animate={{ x: [-5, 5, -5] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    animate={{ x: [5, -5, 5] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                   >
-                    <Hand className="w-8 h-8 text-accent" />
+                    <Hand className="w-8 h-8 text-accent transform scale-x-[-1]" />
                   </motion.div>
                   {/* Connection line */}
                   <div className="absolute right-0 top-1/2 w-16 h-0.5 bg-gradient-to-r from-accent/50 to-primary/50" />
                 </motion.div>
-                
+
                 <motion.div
                   className="absolute -right-24 top-1/2 -translate-y-1/2"
                   initial={{ x: -20, opacity: 0 }}
@@ -247,10 +294,14 @@ const AboutUs = () => {
                 >
                   <motion.div
                     className="p-4 rounded-full bg-accent/20 border border-accent/40"
-                    animate={{ x: [5, -5, 5] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    animate={{ x: [-5, 5, -5] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                   >
-                    <Hand className="w-8 h-8 text-accent transform scale-x-[-1]" />
+                    <Hand className="w-8 h-8 text-accent" />
                   </motion.div>
                   {/* Connection line */}
                   <div className="absolute left-0 top-1/2 w-16 h-0.5 bg-gradient-to-l from-accent/50 to-primary/50" />
@@ -270,8 +321,12 @@ const AboutUs = () => {
               </h2>
               <div className="feature-card">
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  趣云AI致力于为您构建<span className="text-primary font-semibold">"企业的大脑"</span>，
-                  并派遣能干活的<span className="text-accent font-semibold">"双手"</span>，
+                  趣云AI致力于为您构建
+                  <span className="text-primary font-semibold">
+                    "企业的大脑"
+                  </span>
+                  ， 并派遣能干活的
+                  <span className="text-accent font-semibold">"双手"</span>，
                   让AI更懂业务，真正实现从数据到价值的智能闭环。
                 </p>
               </div>
@@ -281,9 +336,9 @@ const AboutUs = () => {
       </section>
 
       {/* Corporate Culture */}
-      <section className="py-24 relative cyber-grid">
+      <section id="culture" className="py-24 relative cyber-grid">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -294,9 +349,7 @@ const AboutUs = () => {
             <h2 className="section-title">
               <span className="text-gradient-accent">企业文化</span>
             </h2>
-            <p className="section-subtitle">
-              以文化铸魂，用价值引领
-            </p>
+            <p className="section-subtitle">以文化铸魂，用价值引领</p>
           </motion.div>
 
           {/* Culture Items */}
@@ -315,7 +368,9 @@ const AboutUs = () => {
                     <item.icon className="w-8 h-8 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
+                    <h3 className="text-xl font-bold text-foreground mb-2">
+                      {item.title}
+                    </h3>
                     <p className="text-muted-foreground">{item.description}</p>
                   </div>
                 </div>
@@ -337,8 +392,12 @@ const AboutUs = () => {
                 <div className="inline-flex p-4 rounded-full bg-accent/10 border border-accent/30 mb-4 group-hover:glow-accent transition-all duration-300">
                   <value.icon className="w-8 h-8 text-accent" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">{value.title}</h3>
-                <p className="text-sm text-muted-foreground">{value.description}</p>
+                <h3 className="text-lg font-bold text-foreground mb-2">
+                  {value.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {value.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -346,7 +405,7 @@ const AboutUs = () => {
       </section>
 
       {/* Contact Us */}
-      <section className="py-24 relative">
+      <section className="py-24 relative" id="contact" >
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -357,9 +416,7 @@ const AboutUs = () => {
             <h2 className="section-title">
               <span className="text-gradient-primary">联系我们</span>
             </h2>
-            <p className="section-subtitle">
-              期待与您的每一次交流
-            </p>
+            <p className="section-subtitle">期待与您的每一次交流</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -375,8 +432,10 @@ const AboutUs = () => {
                 <div className="inline-flex p-3 rounded-full bg-primary/10 mb-4 group-hover:glow-primary transition-all duration-300">
                   <contact.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{contact.type}</h3>
-                <a 
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  {contact.type}
+                </h3>
+                <a
                   href={`mailto:${contact.email}`}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
@@ -391,7 +450,7 @@ const AboutUs = () => {
       {/* Service Commitment */}
       <section className="py-24 relative cyber-grid">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -416,20 +475,25 @@ const AboutUs = () => {
               >
                 {/* Gradient border effect */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-primary via-accent to-primary bg-clip-border" 
-                    style={{ 
-                      backgroundOrigin: 'border-box',
-                      backgroundClip: 'padding-box, border-box',
+                  <div
+                    className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-primary via-accent to-primary bg-clip-border"
+                    style={{
+                      backgroundOrigin: "border-box",
+                      backgroundClip: "padding-box, border-box",
                     }}
                   />
                 </div>
-                
+
                 <div className="relative z-10 flex flex-col items-center text-center">
                   <div className="p-4 rounded-full bg-primary/10 border border-primary/30 mb-6 group-hover:glow-primary transition-all duration-300">
                     <commitment.icon className="w-10 h-10 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">{commitment.title}</h3>
-                  <p className="text-muted-foreground">{commitment.description}</p>
+                  <h3 className="text-xl font-bold text-foreground mb-3">
+                    {commitment.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {commitment.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
