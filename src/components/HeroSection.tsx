@@ -32,14 +32,13 @@ const HeroSection = () => {
             <p className="text-lg md:text-xl text-muted-foreground/80 mb-10 max-w-lg leading-relaxed">
               AI 2.0 时代的智能基建+业务交付的"数字员工"载体
             </p>
-
-            <motion.button
+            {/* <motion.button
               className="btn-demo group text-xl px-10 py-5"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
               <span className="relative z-10">DEMO</span>
-            </motion.button>
+            </motion.button> */}
           </motion.div>
 
           {/* Right Visual - AI Chip */}
@@ -341,28 +340,28 @@ const HeroSection = () => {
                 animate={{ y: [0, -10, 0], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <span className="text-accent">◆</span> Neural.Core.v3
+                <span className="text-accent">◆</span>Quick Agent Factory
               </motion.div>
               <motion.div 
                 className="absolute -bottom-6 right-[5%] px-4 py-2 glass-card rounded-lg text-xs text-primary border border-primary/30 font-mono"
                 animate={{ y: [0, 10, 0], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 1 }}
               >
-                <span className="text-accent">◆</span> DataSync.Active
+                <span className="text-accent">◆</span>Quick AI Data
               </motion.div>
               <motion.div 
                 className="absolute top-1/2 -right-12 px-3 py-1 glass-card rounded-lg text-xs text-accent border border-accent/30 font-mono"
                 animate={{ x: [0, 10, 0], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
               >
-                <span className="text-primary">●</span> Quantum.Link
+                <span className="text-accent">◆</span>Quick Fabric
               </motion.div>
               <motion.div 
                 className="absolute top-1/3 -left-10 px-3 py-1 glass-card rounded-lg text-xs text-primary border border-primary/30 font-mono"
                 animate={{ x: [0, -10, 0], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
               >
-                <span className="text-accent">▲</span> AI.Matrix
+                <span className="text-accent">◆</span>Quick Mind
               </motion.div>
             </div>
           </motion.div>

@@ -9,10 +9,10 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "Home", href: "/", isRoute: true },
-  { label: "Product", href: "#product" },
-  { label: "Solution", href: "#solution" },
-  { label: "About Us", href: "/about", isRoute: true },
+  { label: "首页", href: "/", isRoute: true },
+  { label: "产品介绍", href: "#product" },
+  { label: "解决方案", href: "#solution" },
+  { label: "关于我们", href: "/about", isRoute: true },
 ];
 
 const Navbar = () => {
@@ -32,9 +32,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-              <span className="text-primary font-bold text-sm">Q</span>
-            </div>
+            <img src="/qyai.png" alt="Logo" className="w-10 h-8" />
             <span className="text-xl font-bold">
               <span className="text-gradient-primary">趣云</span>
               <span className="text-foreground ml-1">AI</span>
@@ -43,7 +41,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
+            {navItems.map((item) =>
               item.isRoute ? (
                 <Link
                   key={item.label}
@@ -65,7 +63,7 @@ const Navbar = () => {
                   {item.label}
                 </a>
               )
-            ))}
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,7 +78,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 border-t border-border/50">
-            {navItems.map((item) => (
+            {navItems.map((item) =>
               item.isRoute ? (
                 <Link
                   key={item.label}
@@ -104,7 +102,7 @@ const Navbar = () => {
                   {item.label}
                 </a>
               )
-            ))}
+            )}
           </div>
         )}
       </div>

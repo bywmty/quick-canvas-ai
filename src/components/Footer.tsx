@@ -1,7 +1,7 @@
 const footerLinks = {
   company: {
     title: "关于趣云",
-    links: ["公司介绍", "发展历程", "企业文化", "加入我们"],
+    links: ["公司介绍", "发展历程", "企业文化",],
   },
   products: {
     title: "产品服务",
@@ -11,10 +11,10 @@ const footerLinks = {
     title: "解决方案",
     links: ["零售行业", "金融行业", "制造行业", "快消行业"],
   },
-  support: {
-    title: "支持与服务",
-    links: ["技术文档", "API接口", "常见问题", "联系我们"],
-  },
+  // support: {
+  //   title: "支持与服务",
+  //   links: ["技术文档", "API接口", "常见问题", "联系我们"],
+  // },
   contact: {
     title: "联系我们",
     links: ["商务合作", "技术支持"],
@@ -47,9 +47,7 @@ const Footer = () => {
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-              <span className="text-primary font-bold text-sm">Q</span>
-            </div>
+            <img src="/qyai.png" alt="Logo" className="w-10 h-8" />
             <span className="text-lg font-bold">
               <span className="text-gradient-primary">趣云</span>
               <span className="text-foreground ml-1">AI</span>
@@ -57,11 +55,11 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-            <span>北京趣云科技发展有限公司</span>
+            <span>北京趣云万维信息技术有限公司</span>
             <span className="hidden md:inline">|</span>
-            <span>010-XXXX-XXXX</span>
+            <span>京ICP备2020041042号-1</span>
             <span className="hidden md:inline">|</span>
-            <span>北京市朝阳区XXX大厦</span>
+            <span>京公网安备 11010502043077号</span>
           </div>
 
           <p className="text-sm text-muted-foreground">

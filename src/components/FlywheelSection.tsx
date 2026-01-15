@@ -219,11 +219,11 @@ const FlywheelSection = () => {
               <div className="absolute top-[65%] left-0 right-0 h-0.5 -translate-y-1/2 bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
               
               {/* Energy Core */}
-              <motion.div
+              {/* <motion.div
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-accent/30 to-blue-500/30 border border-primary"
                 animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
-              />
+              /> */}
             </div>
           </div>
 
