@@ -133,6 +133,14 @@
   }
 }
 
+/* 确保锚点不会被遮挡 */
+[id]::before {
+  content: "";
+  display: block;
+  height: 80px; /* 根据导航栏高度调整 */
+  margin-top: -80px; /* 与高度一致，确保正确偏移 */
+}
+
 /* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }

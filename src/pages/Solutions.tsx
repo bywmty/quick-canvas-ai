@@ -18,6 +18,8 @@ import {
   Shield,
   Clock
 } from "lucide-react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -78,6 +80,7 @@ interface CaseStudyProps {
   highlights?: { title: string; content: string }[];
   background?: string;
   isReversed?: boolean;
+  id: string; // 添加 id 属性
 }
 
 const CaseStudy = ({ 
@@ -163,6 +166,17 @@ const CaseStudy = ({
 );
 
 const Solutions = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   const caseStudies: CaseStudyProps[] = [
     {
       industry: "电商行业",
@@ -181,7 +195,8 @@ const Solutions = () => {
       highlights: [
         { title: "多Agent协同", content: "策略、执行、创意三个Agent协同作战，实现智能化广告投放" },
         { title: "人效提升", content: "关键决策自动请求人工确认，实现10倍人效提升" },
-      ]
+      ],
+      id: "retail"
     },
     {
       industry: "直播行业",
@@ -198,7 +213,8 @@ const Solutions = () => {
         { title: "目标达成", content: "①精准圈定核心人群迭代创意内容素材 ②提升抖音CID广告投放转化达成生意增长" },
         { title: "品牌背景", content: "入局抖音后，同类型产品功效同质化严重，行业间内容素材的高度相似，给品牌的投放亟需寻找新的方向突破口" },
       ],
-      isReversed: true
+      isReversed: true,
+      id: "live-streaming"
     },
     {
       industry: "快消行业",
@@ -214,7 +230,8 @@ const Solutions = () => {
       highlights: [
         { title: "技术方案", content: "利用Quick AI Data处理海量消费者行为数据，构建全域One-ID体系" },
         { title: "核心价值", content: "实现消费者精准画像，直接提升广告投放效果" },
-      ]
+      ],
+      id: "fmcg"
     },
     {
       industry: "金融行业",
@@ -231,7 +248,8 @@ const Solutions = () => {
         { title: "技术核心", content: "SGKC内核与风险预判机制，实现语义逻辑的自愈合" },
         { title: "业务价值", content: "安全与效率双赢，大幅降低人工成本的同时提升审批准确率" },
       ],
-      isReversed: true
+      isReversed: true,
+      id: "finance"
     }
   ];
 
@@ -297,7 +315,9 @@ const Solutions = () => {
             className="space-y-16"
           >
             {caseStudies.map((caseStudy, index) => (
-              <CaseStudy key={index} {...caseStudy} />
+              <div key={index} id={caseStudy.id}>
+                <CaseStudy {...caseStudy} />
+              </div>
             ))}
           </motion.div>
         </div>
@@ -316,20 +336,10 @@ const Solutions = () => {
             className="text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              <span className="text-foreground">准备好</span>
-              <span className="text-gradient-accent">开启您的AI之旅</span>
-              <span className="text-foreground">了吗？</span>
+              <span className="text-foreground">无论您身处哪个行业，</span>
+              <span className="text-gradient-accent">趣云AI</span>
+              <span className="text-foreground">都能为您提供专业的解决方案</span>
             </h2>
-            <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-              无论您身处哪个行业，趣云AI都能为您提供专业的解决方案
-            </p>
-            <motion.button
-              className="btn-demo"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              预约演示
-            </motion.button>
           </motion.div>
         </div>
       </section>

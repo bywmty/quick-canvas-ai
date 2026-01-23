@@ -12,12 +12,13 @@ const footerLinks = {
   },
   solutions: {
     title: "解决方案",
-    links: ["零售行业", "金融行业", "制造行业", "快消行业"],
+    links:[
+      { label: "电商行业", href: "/solutions#retail" },
+      { label: "直播行业", href: "/solutions#live-streaming" },
+      { label: "快消行业", href: "/solutions#fmcg" },
+      { label: "金融行业", href: "/solutions#finance" }
+    ]
   },
-  // support: {
-  //   title: "支持与服务",
-  //   links: ["技术文档", "API接口", "常见问题", "联系我们"],
-  // },
   contact: {
     title: "联系我们",
     links: [
