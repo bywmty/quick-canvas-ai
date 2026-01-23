@@ -58,7 +58,7 @@ const FlywheelSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-6"
+          className="text-center mb-4"
         >
           <h2 className="section-title text-foreground">
             MaaS筑底，RaaS破局
@@ -228,7 +228,7 @@ const FlywheelSection = () => {
           </div>
 
           {/* Labels */}
-          <div className="flex justify-between mt-6 px-4">
+          <div className="flex justify-between mt-1 px-4">
             <motion.div 
               className="text-center glass-card px-6 py-4 rounded-xl border border-accent/30"
               whileHover={{ scale: 1.05 }}

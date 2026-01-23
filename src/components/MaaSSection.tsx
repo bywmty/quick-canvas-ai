@@ -195,7 +195,7 @@ const MaaSSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="flex justify-center py-8"
+              className="flex justify-center py-2"
             >
               <div className="w-[90%] relative">
                 {/* Outer glow ring */}
