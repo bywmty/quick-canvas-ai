@@ -10,7 +10,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: "首页", href: "/", isRoute: true },
-  { label: "产品介绍", href: "#product" },
+  { label: "产品介绍", href: "/products", isRoute: true },
   { label: "解决方案", href: "/solutions", isRoute: true },
   { label: "关于我们", href: "/about", isRoute: true },
 ];

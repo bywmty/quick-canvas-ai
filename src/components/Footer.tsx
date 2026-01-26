@@ -8,7 +8,12 @@ const footerLinks = {
   },
   products: {
     title: "产品服务",
-    links: ["Quick AI Data", "Quick Fabric", "Quick Context", "Quick Mind", "Agent Factory"],
+    links: [
+      { label: "人人播", href: "/products#renrenbo" },
+      { label: "智能工厂", href: "/products#agent-factory" },
+      { label: "Quick AI Data", href: "/products#quick-ai-data" },
+      { label: "Quick Mind", href: "/products#quick-mind" },
+    ],
   },
   solutions: {
     title: "解决方案",
